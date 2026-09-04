@@ -1,0 +1,55 @@
+record_id,organization_name,domain,sector,hq_country,hq_city,founded_year,employee_band,source_url,collected_at
+ORG-0001,IonQ Inc,ionq.com,QuantumTech,United States,College Park,2015,201-500,https://ionq.com/company,2026-07-14
+ORG-0002,Rigetti Computing,rigetti.com,QuantumTech,United States,Berkeley,2024,201-500,https://www.rigetti.com/about,2026-07-14
+ORG-0003,PsiQuantum Corp,psiquantum.com,QuantumTech,United States,Palo Alto,2016,501-1000,https://psiquantum.com/company,2026-07-14
+ORG-0004,Quantinuum Ltd,quantinuum.com,QuantumTech,United Kingdom,Cambridge,2021,501-1000,https://www.quantinuum.com/about,2026-07-14
+ORG-0005,D-Wave Systems Ltd,dwavesys.com,QuantumTech,Canada,Burnaby,2025,201-500,https://www.dwavesys.com/company/about-d-wave/,2026-07-14
+ORG-0006,Xanadu Quantum Technologies,xanadu.ai,QuantumTech,Canada,Toronto,2025,201-500,https://xanadu.ai/about,2026-07-14
+ORG-0007,QuEra Computing,quera.com,QuantumTech,United States,Boston,2018,51-200,https://www.quera.com/about,2026-07-14
+ORG-0008,Atom Computing Inc,atom-computing.com,QuantumTech,United States,Berkeley,2018,51-200,https://atom-computing.com/about-us/,2026-07-14
+ORG-0009,Infleqtion,infleqtion.com,QuantumTech,United States,Boulder,2007,201-500,https://www.infleqtion.com/about,2026-07-14
+ORG-0010,Oxford Ionics Ltd,oxfordionics.com,QuantumTech,United Kingdom,Oxford,2019,51-200,https://www.oxionics.com/about,2026-07-14
+ORG-0011,Pasqal SAS,pasqal.com,QuantumTech,United States,Massy,2019,201-500,https://www.pasqal.com/about-us/,2026-07-14
+ORG-0012,IQM Quantum Computers,meetiqm.com,QuantumTech,United States,Espoo,2018,201-500,https://www.meetiqm.com/about,2026-07-14
+ORG-0013,Quandela SAS,quandela.com,QuantumTech,United States,Massy,2017,51-200,https://www.quandela.com/about/,2026-07-14
+ORG-0014,Alice & Bob,alice-bob.com,QuantumTech,United States,Paris,2020,51-200,https://alice-bob.com/company/,2026-07-14
+ORG-0015,Terra Quantum AG,terraquantum.swiss,QuantumTech,United States,St. Gallen,2019,201-500,https://terraquantum.swiss/about,2026-07-14
+ORG-0016,ORCA Computing Ltd,orcacomputing.com,QuantumTech,United States,London,2019,51-200,https://www.orcacomputing.com/about,2026-07-14
+ORG-0017,QuiX Quantum BV,quixquantum.com,QuantumTech,United States,Enschede,2019,11-50,https://www.quixquantum.com/about,2026-07-14
+ORG-0018,Diraq Pty Ltd,diraq.com,QuantumTech,United States,Sydney,2022,51-200,https://diraq.com/about/,2026-07-14
+ORG-0019,Doctolib SAS,doctolib.fr,HealthTech,United States,Levallois-Perret,2013,1001-5000,https://about.doctolib.com/,2026-07-14
+ORG-0020,Kry International AB,kry.se,HealthTech,United States,Stockholm,2014,501-1000,https://www.kry.se/en/about/,2026-07-14
+ORG-0021,SandboxAQ,sandboxaq.com,QuantumTech,United States,Palo Alto,2022,201-500,https://www.sandboxaq.com/company,2026-07-14
+ORG-0022,Multiverse Computing S.L.,multiversecomputing.com,QuantumTech,Spain,San Sebastian,2019,51-200,https://multiversecomputing.com/about,2026-07-14
+ORG-0023,Classiq Technologies,classiq.io,QuantumTech,Israel,Tel Aviv,2020,51-200,https://www.classiq.io/about,2026-07-14
+ORG-0024,Q-CTRL Pty Ltd,q-ctrl.com,QuantumTech,Australia,Sydney,2017,51-200,https://q-ctrl.com/about,2026-07-14
+ORG-0025,Quantum Machines,quantum-machines.co,QuantumTech,Israel,Tel Aviv,2018,51-200,https://www.quantum-machines.co/about/,2026-07-14
+ORG-0026,Photonic Inc,photonic.com,QuantumTech,Canada,Coquitlam,2016,201-500,https://photonic.com/about/,2026-07-14
+ORG-0027,SEEQC Inc.,seeqc.com,QuantumTech,United States,Elmsford,2018,51-200,https://seeqc.com/about/,2026-07-14
+ORG-0028,Quantum Brilliance GmbH,quantumbrilliance.com,QuantumTech,Australia,Canberra,2019,11-50,https://quantumbrilliance.com/about,2026-07-14
+ORG-0029,Nord Quantique,nordquantique.ca,QuantumTech,Canada,Sherbrooke,2020,11-50,https://nordquantique.ca/en/about/,2026-07-14
+ORG-0030,EeroQ Corp,eeroq.com,QuantumTech,United States,Chicago,2017,11-50,https://eeroq.com/about,2026-07-14
+ORG-0031,Tempus AI Inc,tempus.com,HealthTech,United States,Chicago,2024,1001-5000,https://www.tempus.com/about-us/,2026-07-14
+ORG-0032,Flatiron Health,flatiron.com,HealthTech,United States,New York,2024,1001-5000,https://flatiron.com/about-us,2026-07-14
+ORG-0033,Komodo Health Inc,komodohealth.com,HealthTech,United States,San Francisco,2014,501-1000,https://www.komodohealth.com/about,2026-07-14
+ORG-0034,Ada Health GmbH,ada.com,HealthTech,Germany,Berlin,2011,201-500,https://ada.com/about-us/,2026-07-14
+ORG-0035,Oscar Health,hioscar.com,HealthTech,United States,New York,2012,1001-5000,https://www.hioscar.com/about,2026-07-14
+ORG-0036,Hinge Health Inc,hingehealth.com,HealthTech,United States,San Francisco,2014,1001-5000,https://www.hingehealth.com/about-us/,2026-07-14
+ORG-0037,Omada Health,omadahealth.com,HealthTech,United States,San Francisco,2011,501-1000,https://www.omadahealth.com/about,2026-07-14
+ORG-0038,Huma Therapeutics Ltd,huma.com,HealthTech,United Kingdom,London,2011,201-500,https://huma.com/about/,2026-07-14
+ORG-0039,Owkin Inc,owkin.com,HealthTech,United States,New York,2016,201-500,https://www.owkin.com/about-us,2026-07-14
+ORG-0040,Recursion Pharmaceuticals,recursion.com,HealthTech,United States,Salt Lake City,2025,501-1000,https://www.recursion.com/about,2026-07-14
+ORG-0041,"IonQ, Inc.",ionq.com,QuantumTech,United States,Maryland,2015,201-500,https://ionq.com/,2026-07-14
+ORG-0042,D-Wave Quantum Inc.,dwavesys.com,QuantumTech,United States,Palo Alto,1999,201-500,https://www.dwavequantum.com/,2026-07-14
+ORG-0043,Multiverse Computing SL,multiversecomputing.com,QuantumTech,Spain,Donostia,2019,51-200,https://multiversecomputing.com/,2026-07-14
+ORG-0044,Q CTRL PTY LTD,q-ctrl.com,QuantumTech,United States,Los Angeles,2017,51-200,https://q-ctrl.com/,2026-07-14
+ORG-0045,"SEEQC, Inc",seeqc.com,QuantumTech,United States,Elmsford,2018,51-200,https://seeqc.com/,2026-07-14
+ORG-0046,Owkin SAS,owkin.com,HealthTech,France,Paris,2016,201-500,https://www.owkin.com/,2026-07-14
+ORG-0047,Zapata Computing Inc,zapata.ai,QuantumTech,United States,Boston,2017,51-200,https://www.zapata.ai/about,2026-07-14
+ORG-0048,Babylon Health,babylonhealth.com,HealthTech,United Kingdom,London,2013,1001-5000,https://www.babylonhealth.com/about,2026-07-14
+ORG-0049,Qilimanjaro Quantum Tech,qilimanjaro.tech,QuantumTech,,,,,,2026-07-14
+ORG-0050,Exscientia plc,exscientia.ai,HealthTech,,,,,,2026-07-14
+ORG-0051,BenevolentAI,benevolent.com,HealthTech,,,,,,2026-07-14
+ORG-0052,Insilico Medicine,insilico.com,HealthTech,,,,,,2026-07-14
+ORG-0053,Cera Care Ltd,ceracare.co.uk,HealthTech,,,,,,2026-07-14
+ORG-0054,Ro (Roman Health),ro.co,HealthTech,,,,,,2026-07-14
