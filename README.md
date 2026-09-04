@@ -26,7 +26,7 @@ Each row in `enriched_fields.csv` records the seed value, extracted proposal, ac
 - **UPDATED:** a non-empty seed value differs from a validated proposal.
 - **LEFT_ALONE:** the values agree, the page has no explicit evidence, fetching/extraction fails, or validation rejects the proposal.
 
-Worked example: the `ORG-0005 / founded_year` row changes `2025` to `1999`. It records `UPDATED`, the D-Wave first-party URL, `2026-09-04T15:49:20+00:00`, transform `llm_extract_v1:gemini-3.5-flash`, and evidence `Founded in 1999`. That single row is the six-month trace from value to source and decision.
+Worked example: `ORG-0005 / founded_year` changes `2025` to `1999`. Its row records `UPDATED`, `https://www.dwavequantum.com/company/about-d-wave/`, retrieval time `2026-09-04T15:49:20+00:00`, transform `llm_extract_v1:gemini-3.5-flash`, and evidence `Founded in 1999`. This is a complete single-row audit trace suitable for checking again six months later.
 
 ## Deliberate limits
 

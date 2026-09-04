@@ -7,6 +7,7 @@ import os
 import re
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.parse import urlsplit
 
 import requests
 from bs4 import BeautifulSoup
@@ -50,6 +51,10 @@ TRANSFORM = f"llm_extract_{PROMPT_VERSION}:{GEMINI_MODEL}"
 USER_AGENT = "DKG-proof-task/1.0 (field provenance exercise)"
 REQUEST_TIMEOUT = (5, 20)
 MAX_DESCRIPTION_WORDS = 35
+APPROVED_REBRAND_DOMAINS = {
+    "dwavesys.com": {"dwavequantum.com"},
+    "meetiqm.com": {"iqm.tech"},
+}
 
 EXTRACTION_SCHEMA = {
     "type": "object",
@@ -106,7 +111,14 @@ def load_seed(path=SEED_PATH):
     return selected
 
 
-def fetch_page(url):
+def is_approved_source(declared_domain, url):
+    declared_domain = declared_domain.casefold().removeprefix("www.")
+    host = (urlsplit(url).hostname or "").casefold().removeprefix("www.")
+    approved_domains = {declared_domain} | APPROVED_REBRAND_DOMAINS.get(declared_domain, set())
+    return any(host == domain or host.endswith(f".{domain}") for domain in approved_domains)
+
+
+def fetch_page(url, declared_domain):
     retrieved_at = utc_now()
     try:
         response = requests.get(
@@ -116,6 +128,13 @@ def fetch_page(url):
             allow_redirects=True,
         )
         response.raise_for_status()
+        if not is_approved_source(declared_domain, response.url):
+            return {
+                "html": "",
+                "source_url": response.url,
+                "retrieved_at": retrieved_at,
+                "error": "fetch failed: redirect left the approved first-party domains",
+            }
         return {
             "html": response.text,
             "source_url": response.url,
@@ -186,12 +205,28 @@ def validate_evidence(field_name, value, evidence, source_text):
             return False, "founding year is outside the plausible range 1800-current year"
         if value not in evidence:
             return False, "founding year does not appear in its evidence quote"
+        years_in_evidence = re.findall(r"\b(?:18|19|20)\d{2}\b", evidence)
+        if years_in_evidence != [value]:
+            return False, "founding evidence must contain exactly one candidate year"
+        if not re.search(r"\b(founded|established|formed|launched|inception)\b", evidence, re.IGNORECASE):
+            return False, "evidence does not explicitly identify a founding event"
 
     elif field_name == "hq_country":
-        if value.casefold() not in evidence.casefold():
-            return False, "HQ country does not appear in its evidence quote"
-        if "headquarter" not in evidence.casefold():
-            return False, "evidence does not explicitly identify a headquarters"
+        headquarters_clause = re.split(
+            r"\b(?:with|and)\s+(?:other\s+)?offices?\b",
+            evidence,
+            maxsplit=1,
+            flags=re.IGNORECASE,
+        )[0]
+        headquarters_pattern = (
+            r"\bheadquartered\s+in\b|"
+            r"\bheadquarters\s+(?:is|are|in)\b|"
+            r"\b(?:company|corporate|global)\s+headquarters\b"
+        )
+        if not re.search(headquarters_pattern, headquarters_clause, re.IGNORECASE):
+            return False, "evidence does not explicitly identify a headquarters location"
+        if not re.search(rf"\b{re.escape(value)}\b", headquarters_clause, re.IGNORECASE):
+            return False, "HQ country is outside the headquarters clause"
 
     elif field_name == "description":
         if len(value.split()) > MAX_DESCRIPTION_WORDS:
@@ -209,17 +244,22 @@ def validate_evidence(field_name, value, evidence, source_text):
     return True, "accepted: deterministic validation passed"
 
 
-def comparable_value(value):
-    normalized = normalize_whitespace(value).casefold().rstrip(".")
+def canonical_country(value):
+    normalized = normalize_whitespace(value)
     aliases = {
-        "u.s.": "united states",
-        "u.s.a.": "united states",
-        "usa": "united states",
-        "united states of america": "united states",
-        "uk": "united kingdom",
-        "u.k.": "united kingdom",
+        "u.s.": "United States",
+        "u.s.a.": "United States",
+        "us": "United States",
+        "usa": "United States",
+        "united states of america": "United States",
+        "uk": "United Kingdom",
+        "u.k.": "United Kingdom",
     }
-    return aliases.get(normalized, normalized)
+    return aliases.get(normalized.casefold().rstrip("."), normalized)
+
+
+def comparable_value(value):
+    return canonical_country(value).casefold().rstrip(".")
 
 
 def decide_write(old_value, new_value, is_valid, validation_reason):
@@ -249,6 +289,8 @@ def decision_rows(seed_row, extraction, source_text, source_url, retrieved_at, e
             is_valid, validation_reason = validate_evidence(
                 field_name, new_value, evidence, source_text
             )
+        if is_valid and field_name == "hq_country":
+            new_value = canonical_country(new_value)
 
         action, reason = decide_write(old_value, new_value, is_valid, validation_reason)
         rows.append(
@@ -298,7 +340,7 @@ def main():
 
     output_rows = []
     for seed_row in load_seed():
-        fetched = fetch_page(seed_row["source_url"])
+        fetched = fetch_page(seed_row["source_url"], seed_row["domain"])
         if fetched["error"]:
             extraction = {}
             source_text = ""
