@@ -39,3 +39,24 @@ OpenLineage was deliberately not added as a dependency or service. If this job l
 There is no crawler, database, async processing, entity resolution, confidence score, or heuristic fallback. Gemini is used only inside `extract_fields()` to propose structured values; deterministic Python decides whether to accept them. If `GEMINI_API_KEY` is absent, the program stops. `extract_fields()` is the small replacement point for a future OpenAI fallback. A coding assistant helped design and implement the repository; Gemini performed the webpage extraction.
 
 At 20,000 records, sequential network and API latency would break first, followed by rate limits, website blocking, and the lack of durable checkpoints. The next step would be bounded concurrency, retries with backoff, cached raw responses, and resumable storage - not a larger framework until those needs are demonstrated.
+
+### Lineage limitations and production next steps
+
+The submitted output provides field-level provenance sufficient to answer the bounded task's main audit question: for a specific field I can identify the source URL, retrieval time, supporting evidence, run ID, transformation stages, proposed value, write action, and decision reason.
+
+It does not provide full historical replayability. In particular, the pipeline does not retain the complete raw HTTP response, so if a source page changes or disappears later, the evidence quote remains available but the exact page observed during the run cannot be reconstructed from this repository alone.
+
+For a production system I would extend the lineage model with:
+
+* an immutable raw HTML/text snapshot for every successful fetch;
+* a SHA-256 hash of the retrieved source content;
+* a hash/version of the input seed dataset;
+* the Git commit that produced the run;
+* the exact prompt version or prompt hash and model revision;
+* an immutable per-run output rather than overwriting the previous CSV;
+* a small run manifest containing run ID, start/end timestamps, status, input/output hashes, model, prompt version, code version, and record counts.
+
+That would allow a stronger six-month audit question to be answered: not only "where did this value come from?" but also "can I reconstruct exactly which source content, code, model configuration, and input dataset produced this decision?"
+
+I deliberately did not add that persistence layer to the proof task because the requested scope was twelve records in time bounded manner. The current implementation captures the field-level evidence and write semantics directly requested by the exercise while leaving a clear path toward immutable, replayable production lineage.
+
